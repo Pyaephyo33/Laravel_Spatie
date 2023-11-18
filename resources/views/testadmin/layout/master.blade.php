@@ -41,11 +41,11 @@
 <body>
 
   <!-- ======= Header ======= -->
-  @include('admin.layout.header')
+  @include('testadmin.layout.header')
   <!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
-  @include('admin.layout.sidebar')
+  @include('testadmin.layout.sidebar')
   <!-- End Sidebar-->
 
   <!-- content -->

@@ -19,13 +19,21 @@ Route::get('/', function () {
 });
 
 
-Route::get('/admin',function (){
-    return view('admin.layout.master');
+// Route::get('/secondAdmin',function (){
+//     return view('SecondAdmin.layout.master');
+// });
+
+Route::get('/testAdmin', function(){
+    return view('testadmin.layout.master');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/admin', function () {
+    return view('admin.index');
+})->middleware(['auth', 'role:admin'])->name('admin.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
