@@ -41,4 +41,10 @@ class PermissionController extends Controller
         $permission->update($data);
         return to_route('admin.permissions.index');
     }
+
+    public function destroy(Permission $permission)
+    {
+        $permission->delete();
+        return back()->with('message', 'Permission deleted.');
+    }
 }

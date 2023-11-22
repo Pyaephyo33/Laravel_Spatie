@@ -30,6 +30,15 @@
                                                 <a href="" class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md">Delete</a>
                                             </div>
                                         </div>
+
+                                        <div class="space-x-2">
+                                            <form method="POST" action="{{ route('admin.permissions.destroy', $permission->id) }}" onsubmit="return confirm('Are you sure?');">
+                                            @csrf
+                                            @method('DELETE')
+                                                <a href="{{ route('admin.permissions.edit', $permission->id)}}" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">Edit</a>
+                                            <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md">Delete</button>
+                                        </form>
+                                    </div>
                                     </td>
                                 </tr>
                             @endforeach

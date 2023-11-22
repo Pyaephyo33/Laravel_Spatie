@@ -11,7 +11,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::whereNotIn('name', ['admin'])->get();
         return view('admin.roles.index', compact('roles'));
     }
 
@@ -26,7 +26,7 @@ class RoleController extends Controller
             'name' => 'required|min:3',
         ]);
         Role::create($data);
-        return to_route('admin.roles.index');
+        return to_route('admin.roles.index')->with('message', 'Role Created Successfully.');
     }
 
     public function edit(Role $role)
@@ -40,7 +40,12 @@ class RoleController extends Controller
             'name' => 'required',
         ]);
         $role->update($data);
-        return to_route('admin.roles.index');
+        return to_route('admin.roles.index')->with('message', 'Role Updated Successfully.');
+    }
+    public function destroy(Role $role)
+    {
+        $role->delete();
+        return back()->with('message', 'Role deleted.');
     }
 
 }
