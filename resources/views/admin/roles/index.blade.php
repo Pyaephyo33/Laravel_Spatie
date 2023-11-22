@@ -36,8 +36,12 @@
                                     {{ $role->name }}
                                 </td>
                                 <td class="whitespace-nowrap py-4 p-4 text-sm font-medium text-gray-900 sm:pl-0">
-                                    <a href="">Edit</a>
-                                    <a href="">Delete</a>
+                                    <div class="flex justify-end">
+                                        <div class="space-x-2">
+                                            <a href="{{ route('admin.roles.edit', $role->id)}}" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">Edit</a>
+                                            <a href="" class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md">Delete</a>
+                                        </div>
+                                    </div>
                                 </td>
                                 {{-- <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                                 <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, Lindsay Walton</span></a>
