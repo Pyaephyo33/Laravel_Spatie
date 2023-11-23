@@ -26,19 +26,14 @@
                                     <td class="whitespace-nowrap py-4 p-4 text-sm font-medium text-gray-900 sm:pl-0">
                                         <div class="flex justify-end">
                                             <div class="space-x-2">
-                                                <a href="{{ route('admin.permissions.edit', $permission->id)}}" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">Edit</a>
-                                                <a href="" class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md">Delete</a>
-                                            </div>
+                                                <form method="POST" action="{{ route('admin.permissions.destroy', $permission->id) }}" onsubmit="return confirm('Are you sure?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                    <a href="{{ route('admin.permissions.edit', $permission->id)}}" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">Edit</a>
+                                                <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md">Delete</button>
+                                            </form>
                                         </div>
-
-                                        <div class="space-x-2">
-                                            <form method="POST" action="{{ route('admin.permissions.destroy', $permission->id) }}" onsubmit="return confirm('Are you sure?');">
-                                            @csrf
-                                            @method('DELETE')
-                                                <a href="{{ route('admin.permissions.edit', $permission->id)}}" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">Edit</a>
-                                            <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md">Delete</button>
-                                        </form>
-                                    </div>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
