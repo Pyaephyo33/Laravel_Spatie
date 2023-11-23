@@ -39,10 +39,21 @@ Route::get('/dashboard', function () {
 // })->middleware(['auth', 'role:admin'])->name('admin.index');
 
 Route::middleware(['auth', 'role:admin'])->name('admin.')->prefix('admin')->group(function(){
+    // Index
     Route::get('/', [IndexController::class, 'index'])->name('index');
+
+    // Role
     Route::resource('/roles', RoleController::class);
+    Route::post('/roles/{role}/permissions', [RoleController::class, 'givePermission'])->name('roles.permissions');
+    Route::delete('/roles/{role}/permissions/{permission}', [RoleController::class, 'revokePermission'])->name('roles.permissions.revoke');
+
+    // Permission
     Route::resource('/permissions', PermissionController::class);
 });
+
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
