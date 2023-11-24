@@ -5,14 +5,14 @@
                 <div class="flex p-2">
                     <a href="{{ route('admin.permissions.index')}}" class="px-4 py-2 text-white bg-green-700 hover:bg-green-500 text-slate-100 rounded-md">Permission Index</a>
                 </div>
-            <div class="px-4 sm:px-6 lg:px-8">
+            <div class="px-4 sm:px-6 lg:px-8 bg-slate-100 rounded-md">
                 <div class="-mx-4 mt-8 sm:-mx-0">
                     <div class="space-y-8 divide-y divide-gray-200 w-1/2 mt-10">
                         <form method="post" action="{{ route('admin.permissions.update', $permission)}}">
                             @csrf
                             @method('PUT')
                           <div class="sm:col-span-6">
-                            <label for="name" class="block text-sm font-medium text-gray-700"> Post name </label>
+                            <label for="name" class="block text-sm font-medium text-gray-700"> Permission name </label>
                             <div class="mt-1">
                               <input type="text" id="name" name="name" class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal sm:text-sm sm:leading-5" value="{{ $permission->name }}" />
                             </div>
@@ -27,6 +27,43 @@
                       </div>
                 </div>
               </div>
+              
+              <div class="mt-6 p-2 bg-slate-100 rounded-md">
+                <h2 class="text-lg font-semibold">Roles</h2>
+                <div class="flex space-x-2 p-2">
+                    @if ($permission->roles)
+                        @foreach ($permission->roles as $permission_role)
+                            <form method="POST" action="{{ route('admin.permissions.roles.remove', [$permission->id, $permission_role->id]) }}" onsubmit="return confirm('Are you sure?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="px-4 py-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md">{{$permission_role->name}}</button>
+                            </form>
+                        @endforeach
+                    @endif
+                </div>
+                <div class="max-w-xl mt-6">
+                    <form method="post" action="{{ route('admin.permissions.roles', $permission->id) }}">
+                        @csrf
+                        <div class="sm:col-span-6">
+                            <label for="role"
+                                class="block text-sm font-medium text-gray-700">Roles</label>
+                            <select id="role" name="role" autocomplete="role-name"
+                                class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        @error('role')
+                            <span class="text-red-400 text-sm">{{ $message }}</span>
+                        @enderror
+                        <div class="sm:col-span-6 pt-5">
+                            <button type="submit"
+                                class="px-4 py-2 bg-cyan-500 hover:bg-cyan-700 rounded-md text-white">Assign</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
         </div>
     </div>
