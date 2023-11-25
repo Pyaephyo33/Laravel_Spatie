@@ -67,7 +67,7 @@ class RoleController extends Controller
             $role->revokePermissionTo($permission);
             return back()->with('message', 'Permission revoked.');
         }
-        return back()->with('message', 'Permission not exists.');
+        return back()->with('message', 'Permission does not exists.');
     }
 
 }

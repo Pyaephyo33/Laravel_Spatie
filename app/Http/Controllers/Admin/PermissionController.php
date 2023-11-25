@@ -62,12 +62,13 @@ class PermissionController extends Controller
         return back()->with('message','Role Assigned.');
     }
 
+    // Remove Role
     public function removeRole(Permission $permission, Role $role)
     {
         if($permission->hasRole($role)){
             $permission->removeRole($role);
             return back()->with('message', 'Role removed.');
         }
-        return back()->with('message','Role not exists.');
+        return back()->with('message','Role does not exists.');
     }
 }
